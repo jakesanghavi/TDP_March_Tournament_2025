@@ -1,2 +1,2 @@
 *.ipynb -linguist-detectable
-*.ipynb -linguist-documentation
+*.ipynb linguist-documentation
