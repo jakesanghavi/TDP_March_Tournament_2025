@@ -6,12 +6,27 @@ from urllib.request import urlopen
 from fuzzywuzzy import process
 from IPython.display import Image as ImageDisplay
 import pandas as pd
+import torch
+from sklearn.base import BaseEstimator
 
 logos = pd.read_csv('logos.csv')
 logo_mapper = pd.read_csv('ncaa_name_mapper.csv')
 
-# Full bracket simulating function
+# Take in their data and model and run it through our more specific functions based on the model type
 def simulate_tournament(test_data, model):
+
+    if isinstance(model, torch.nn.Module):
+        return simulate_tournament_pytorch(test_data, model)
+    elif isinstance(model, BaseEstimator):
+        return simulate_tournament_sklearn(test_data, model)
+    else:
+        raise TypeError("Unsupported model type. Must be a PyTorch or scikit-learn model.")
+
+# Full bracket simulating function
+def simulate_tournament_sklearn(test_data, model):
+    
+    if not isinstance(test_data, pd.DataFrame):
+        raise TypeError("Please pass data as a pandas DataFrame!")
     
     # Custom sort functions to properly order matchups for the next round
     custom_sort1 = ['W', 'X', 'Y', 'Z']
@@ -104,6 +119,79 @@ def simulate_tournament(test_data, model):
         current_round += 1
 
     # Add the teams from R1 (predefined by seeding) and return
+    penultimate = [inits] + to_return
+    return [[tuple(sublist[j:j+2]) if j+1 < len(sublist) else (sublist[j],) 
+           for j in range(0, len(sublist), 2)] for sublist in penultimate]
+
+def simulate_tournament_pytorch(test_data, model, device='cpu'):
+    
+    if not isinstance(test_data, pd.DataFrame):
+        raise TypeError("Please pass data as a pandas DataFrame!")
+    
+    # Custom sort functions to properly order matchups for the next round
+    custom_sort1 = ['W', 'X', 'Y', 'Z']
+    custom_sort2 = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15]
+    
+    region_order = {region: i for i, region in enumerate(custom_sort1)}
+    seed_order = {seed: i for i, seed in enumerate(custom_sort2)}
+    
+    extra_cols_a = ['TotG', 'TotW', 'TotL', 'NeutralG', 'WinPct']
+    extra_cols_b = ['TotG.1', 'TotW.1', 'TotL.1', 'NeutralG.1', 'WinPct.1']
+    
+    test_data = test_data[test_data['Round'] == 1]
+    
+    inits = list(test_data[['TeamA', 'RegionTeamA', 'SeedTeamA']].itertuples(index=False, name=None)) + \
+            list(test_data[['TeamB', 'RegionTeamB', 'SeedTeamB']].itertuples(index=False, name=None))
+    
+    inits = sorted(inits, key=lambda x: (region_order[x[1]], seed_order[x[2]]))
+    
+    to_return = []
+    current_round = 1
+    
+    model.to(device)
+    model.eval()
+    
+    while current_round <= 5:
+        round_data = test_data[test_data['Round'] == current_round]
+        
+        if round_data.empty:
+            break
+
+        round_X = round_data.drop(columns=['RegionTeamA', 'RegionTeamB', 'TeamA', 'TeamB', 'ResultTeamA'])
+        round_teams = round_data[['TeamA', 'TeamB', 'RegionTeamA', 'RegionTeamB', 'SeedTeamA', 'SeedTeamB']]
+        
+        with torch.no_grad():
+            inputs = torch.tensor(round_X.values, dtype=torch.float32, device=device)
+            predictions = model(inputs).squeeze().cpu().numpy()
+                    
+        winners = [(row.TeamA if pred > 0.5 else row.TeamB, row.RegionTeamA if pred > 0.5 else row.RegionTeamB, \
+                    row.SeedTeamA if pred > 0.5 else row.SeedTeamB) for row, pred in zip(round_teams.itertuples(), predictions)]
+        
+        winners = sorted(winners, key=lambda x: (region_order[x[1]], seed_order[x[2]]))
+        
+        next_round_data = []
+        for i in range(0, len(winners), 2):
+            if i + 1 < len(winners):
+                next_team_A, seed_team_A = winners[i][0], winners[i][2]
+                next_team_B, seed_team_B = winners[i + 1][0], winners[i + 1][2]
+                
+                team_A_stats = test_data[(test_data['TeamA'] == next_team_A) | (test_data['TeamB'] == next_team_A)].\
+                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB']).iloc[-1]
+                team_B_stats = test_data[(test_data['TeamA'] == next_team_B) | (test_data['TeamB'] == next_team_B)].\
+                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB']).iloc[-1]
+                
+                team_A_stats = team_A_stats[team_A_stats.index.str.contains('TeamA') | team_A_stats.index.isin(extra_cols_a)]
+                team_B_stats = team_B_stats[team_B_stats.index.str.contains('TeamB') | team_B_stats.index.isin(extra_cols_b)]
+                
+                matchup = pd.concat([pd.Series({'TeamA': next_team_A, 'TeamB': next_team_B, \
+                                      'Round': current_round + 1, 'SeedTeamA': seed_team_A, 'SeedTeamB': seed_team_B }), \
+                                      team_A_stats, team_B_stats], axis=0)
+                next_round_data.append(matchup)
+        
+        test_data = pd.concat([test_data, pd.DataFrame(next_round_data)], ignore_index=True)
+        to_return.append(winners)
+        current_round += 1
+    
     penultimate = [inits] + to_return
     return [[tuple(sublist[j:j+2]) if j+1 < len(sublist) else (sublist[j],) 
            for j in range(0, len(sublist), 2)] for sublist in penultimate]
@@ -437,7 +525,7 @@ def draw_bracket(plot_feeder, name="My", text_color='black'):
     if name != "My":
         name += "'s"
     
-    plt.title(f"{name} 2025 March Madness Bracket".upper())
+    plt.title(f"{name} 2025 March Tournament Bracket".upper())
     
     # Add in special logo and text for their predicted winner!
     ax.text(2.5, 21, "My 2025 Champion", ha='center', weight='bold')
