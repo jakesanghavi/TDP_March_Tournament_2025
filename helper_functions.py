@@ -71,7 +71,15 @@ def simulate_tournament_sklearn(test_data, model):
         round_teams = round_data[['TeamA', 'TeamB', 'RegionTeamA', 'RegionTeamB', 'SeedTeamA', 'SeedTeamB']]
                 
         # Predict winners using the model you made
-        predictions = model.predict(round_X)
+        predictions = []
+        
+        # Predict winners using the model you made (classification vs. regression)
+        if hasattr(model, "_estimator_type") and model._estimator_type == "regressor":
+            score_preds = model.predict(round_X)
+            print(score_preds)
+            predictions = [1 if a >= b else 0 for a, b in zip(score_preds[:, 0], score_preds[:, 1])]
+        else:
+            predictions = model.predict(round_X)
             
         
         # Get the winner names
@@ -164,8 +172,22 @@ def simulate_tournament_pytorch(test_data, model, device='cpu'):
             inputs = torch.tensor(round_X.values, dtype=torch.float32, device=device)
             predictions = model(inputs).squeeze().cpu().numpy()
                     
-        winners = [(row.TeamA if pred > 0.5 else row.TeamB, row.RegionTeamA if pred > 0.5 else row.RegionTeamB, \
-                    row.SeedTeamA if pred > 0.5 else row.SeedTeamB) for row, pred in zip(round_teams.itertuples(), predictions)]
+        winners = []
+        
+        # Classification vs. Regression
+        if predictions.ndim == 1 or predictions.shape[1] == 1:
+            winners = [
+                (row.TeamA if pred > 0.5 else row.TeamB, row.RegionTeamA if pred > 0.5 else row.RegionTeamB,
+                 row.SeedTeamA if pred > 0.5 else row.SeedTeamB) 
+                for row, pred in zip(round_teams.itertuples(), predictions)
+            ]
+        else:
+            winners = [
+                (row.TeamA if pred[0] > pred[1] else row.TeamB, 
+                 row.RegionTeamA if pred[0] > pred[1] else row.RegionTeamB,
+                 row.SeedTeamA if pred[0] > pred[1] else row.SeedTeamB)
+                for row, pred in zip(round_teams.itertuples(), predictions)
+            ]
         
         winners = sorted(winners, key=lambda x: (region_order[x[1]], seed_order[x[2]]))
         
