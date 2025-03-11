@@ -1,0 +1,145 @@
+Season | The season during which the game took place (e.g., 2024-2025).
+Round | The round of the tournament or playoffs (e.g., First Round, Quarterfinals).
+RegionTeamA | The region in which Team A is located or representing.
+RegionTeamB | The region in which Team B is located or representing.
+TeamA | The name or identifier for Team A.
+TeamB | The name or identifier for Team B.
+SeedTeamA | The seed or ranking of Team A in the tournament.
+SeedTeamB | The seed or ranking of Team B in the tournament.
+ScoreTeamA | The final score of Team A in the game.
+ScoreTeamB | The final score of Team B in the game.
+TeamA_TotScore | The total points scored by Team A in the season.
+TeamA_TotFGM | The total field goals made by Team A in the season.
+TeamA_TotFGA | The total field goals attempted by Team A in the season.
+TeamA_TotFGM3 | The total three-point field goals made by Team A in the season.
+TeamA_TotFGA3 | The total three-point field goals attempted by Team A in the season.
+TeamA_TotFTM | The total free throws made by Team A in the season.
+TeamA_TotFTA | The total free throws attempted by Team A in the season.
+TeamA_TotOR | The total offensive rebounds by Team A in the season.
+TeamA_TotDR | The total defensive rebounds by Team A in the season.
+TeamA_TotAst | The total assists by Team A in the season.
+TeamA_TotTO | The total turnovers by Team A in the season.
+TeamA_TotStl | The total steals by Team A in the season.
+TeamA_TotBlk | The total blocks by Team A in the season.
+TeamA_TotPF | The total personal fouls by Team A in the season.
+TeamA_HomeW | The total home game wins by Team A in the season.
+TeamA_AwayW | The total away game wins by Team A in the season.
+TeamA_NeutralW | The total neutral site wins by Team A in the season.
+TeamA_HomeL | The total home game losses by Team A in the season.
+TeamA_AwayL | The total away game losses by Team A in the season.
+TeamA_NeutralL | The total neutral site losses by Team A in the season.
+TeamA_TotOppScore | The total points scored by opponents against Team A in the season.
+TeamA_TotOppFGM | The total field goals made by opponents against Team A in the season.
+TeamA_TotOppFGA | The total field goals attempted by opponents against Team A in the season.
+TeamA_TotOppFGM3 | The total three-point field goals made by opponents against Team A.
+TeamA_TotOppFGA3 | The total three-point field goals attempted by opponents against Team A.
+TeamA_TotOppFTM | The total free throws made by opponents against Team A in the season.
+TeamA_TotOppFTA | The total free throws attempted by opponents against Team A in the season.
+TeamA_TotOppOR | The total offensive rebounds by opponents against Team A in the season.
+TeamA_TotOppDR | The total defensive rebounds by opponents against Team A in the season.
+TeamA_TotOppAst | The total assists by opponents against Team A in the season.
+TeamA_TotOppTO | The total turnovers by opponents against Team A in the season.
+TeamA_TotOppStl | The total steals by opponents against Team A in the season.
+TeamA_TotOppBlk | The total blocks by opponents against Team A in the season.
+TeamA_TotOppPF | The total personal fouls by opponents against Team A in the season.
+TotG | The total number of games played by Team A in the season.
+TotW | The total number of wins by Team A in the season.
+TotL | The total number of losses by Team A in the season.
+NeutralG | The total number of neutral site games played by Team A in the season.
+WinPct | The winning percentage of Team A in the season.
+TeamA_AvgTotScore | The average total points scored by Team A per game in the season.
+TeamA_AvgTotFGM | The average total field goals made by Team A per game in the season.
+TeamA_AvgTotFGA | The average total field goals attempted by Team A per game in the season.
+TeamA_AvgTotFGM3 | The average total three-point field goals made by Team A per game.
+TeamA_AvgTotFGA3 | The average total three-point field goals attempted by Team A per game.
+TeamA_AvgTotFTM | The average total free throws made by Team A per game in the season.
+TeamA_AvgTotFTA | The average total free throws attempted by Team A per game in the season.
+TeamA_AvgTotOR | The average total offensive rebounds by Team A per game in the season.
+TeamA_AvgTotDR | The average total defensive rebounds by Team A per game in the season.
+TeamA_AvgTotAst | The average total assists by Team A per game in the season.
+TeamA_AvgTotTO | The average total turnovers by Team A per game in the season.
+TeamA_AvgTotStl | The average total steals by Team A per game in the season.
+TeamA_AvgTotBlk | The average total blocks by Team A per game in the season.
+TeamA_AvgTotPF | The average total personal fouls by Team A per game in the season.
+TeamA_AvgTotOppScore | The average total points scored by opponents against Team A per game.
+TeamA_AvgTotOppFGM | The average total field goals made by opponents against Team A per game.
+TeamA_AvgTotOppFGA | The average total field goals attempted by opponents against Team A.
+TeamA_AvgTotOppFGM3 | The average total three-point field goals made by opponents against Team A.
+TeamA_AvgTotOppFGA3 | The average total three-point field goals attempted by opponents against Team A.
+TeamA_AvgTotOppFTM | The average total free throws made by opponents against Team A.
+TeamA_AvgTotOppFTA | The average total free throws attempted by opponents against Team A.
+TeamA_AvgTotOppOR | The average total offensive rebounds by opponents against Team A.
+TeamA_AvgTotOppDR | The average total defensive rebounds by opponents against Team A.
+TeamA_AvgTotOppAst | The average total assists by opponents against Team A.
+TeamA_AvgTotOppTO | The average total turnovers by opponents against Team A.
+TeamA_AvgTotOppStl | The average total steals by opponents against Team A.
+TeamA_AvgTotOppBlk | The average total blocks by opponents against Team A.
+TeamA_AvgTotOppPF | The average total personal fouls by opponents against Team A.
+TeamB_TotScore | The total points scored by Team B in the season.
+TeamB_TotFGM | The total field goals made by Team B in the season.
+TeamB_TotFGA | The total field goals attempted by Team B in the season.
+TeamB_TotFGM3 | The total three-point field goals made by Team B in the season.
+TeamB_TotFGA3 | The total three-point field goals attempted by Team B in the season.
+TeamB_TotFTM | The total free throws made by Team B in the season.
+TeamB_TotFTA | The total free throws attempted by Team B in the season.
+TeamB_TotOR | The total offensive rebounds by Team B in the season.
+TeamB_TotDR | The total defensive rebounds by Team B in the season.
+TeamB_TotAst | The total assists by Team B in the season.
+TeamB_TotTO | The total turnovers by Team B in the season.
+TeamB_TotStl | The total steals by Team B in the season.
+TeamB_TotBlk | The total blocks by Team B in the season.
+TeamB_TotPF | The total personal fouls by Team B in the season.
+TeamB_HomeW | The total home game wins by Team B in the season.
+TeamB_AwayW | The total away game wins by Team B in the season.
+TeamB_NeutralW | The total neutral site wins by Team B in the season.
+TeamB_HomeL | The total home game losses by Team B in the season.
+TeamB_AwayL | The total away game losses by Team B in the season.
+TeamB_NeutralL | The total neutral site losses by Team B in the season.
+TeamB_TotOppScore | The total points scored by opponents against Team B in the season.
+TeamB_TotOppFGM | The total field goals made by opponents against Team B in the season.
+TeamB_TotOppFGA | The total field goals attempted by opponents against Team B in the season.
+TeamB_TotOppFGM3 | The total three-point field goals made by opponents against Team B.
+TeamB_TotOppFGA3 | The total three-point field goals attempted by opponents against Team B.
+TeamB_TotOppFTM | The total free throws made by opponents against Team B in the season.
+TeamB_TotOppFTA | The total free throws attempted by opponents against Team B in the season.
+TeamB_TotOppOR | The total offensive rebounds by opponents against Team B in the season.
+TeamB_TotOppDR | The total defensive rebounds by opponents against Team B in the season.
+TeamB_TotOppAst | The total assists by opponents against Team B in the season.
+TeamB_TotOppTO | The total turnovers by opponents against Team B in the season.
+TeamB_TotOppStl | The total steals by opponents against Team B in the season.
+TeamB_TotOppBlk | The total blocks by opponents against Team B in the season.
+TeamB_TotOppPF | The total personal fouls by opponents against Team B in the season.
+TotG | The total number of games played by Team B in the season.
+TotW | The total number of wins by Team B in the season.
+TotL | The total number of losses by Team B in the season.
+NeutralG | The total number of neutral site games played by Team B in the season.
+WinPct | The winning percentage of Team B in the season.
+TeamB_AvgTotScore | The average total points scored by Team B per game in the season.
+TeamB_AvgTotFGM | The average total field goals made by Team B per game in the season.
+TeamB_AvgTotFGA | The average total field goals attempted by Team B per game in the season.
+TeamB_AvgTotFGM3 | The average total three-point field goals made by Team B per game.
+TeamB_AvgTotFGA3 | The average total three-point field goals attempted by Team B per game.
+TeamB_AvgTotFTM | The average total free throws made by Team B per game in the season.
+TeamB_AvgTotFTA | The average total free throws attempted by Team B per game in the season.
+TeamB_AvgTotOR | The average total offensive rebounds by Team B per game in the season.
+TeamB_AvgTotDR | The average total defensive rebounds by Team B per game in the season.
+TeamB_AvgTotAst | The average total assists by Team B per game in the season.
+TeamB_AvgTotTO | The average total turnovers by Team B per game in the season.
+TeamB_AvgTotStl | The average total steals by Team B per game in the season.
+TeamB_AvgTotBlk | The average total blocks by Team B per game in the season.
+TeamB_AvgTotPF | The average total personal fouls by Team B per game in the season.
+TeamB_AvgTotOppScore | The average total points scored by opponents against Team B per game.
+TeamB_AvgTotOppFGM | The average total field goals made by opponents against Team B per game.
+TeamB_AvgTotOppFGA | The average total field goals attempted by opponents against Team B.
+TeamB_AvgTotOppFGM3 | The average total three-point field goals made by opponents against Team B.
+TeamB_AvgTotOppFGA3 | The average total three-point field goals attempted by opponents against Team B.
+TeamB_AvgTotOppFTM | The average total free throws made by opponents against Team B.
+TeamB_AvgTotOppFTA | The average total free throws attempted by opponents against Team B.
+TeamB_AvgTotOppOR | The average total offensive rebounds by opponents against Team B.
+TeamB_AvgTotOppDR | The average total defensive rebounds by opponents against Team B.
+TeamB_AvgTotOppAst | The average total assists by opponents against Team B.
+TeamB_AvgTotOppTO | The average total turnovers by opponents against Team B.
+TeamB_AvgTotOppStl | The average total steals by opponents against Team B.
+TeamB_AvgTotOppBlk | The average total blocks by opponents against Team B.
+TeamB_AvgTotOppPF | The average total personal fouls by opponents against Team B.
+ResultTeamA | The result of the game for Team A (1: win, 0: loss)
