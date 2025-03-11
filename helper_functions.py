@@ -76,7 +76,6 @@ def simulate_tournament_sklearn(test_data, model):
         # Predict winners using the model you made (classification vs. regression)
         if hasattr(model, "_estimator_type") and model._estimator_type == "regressor":
             score_preds = model.predict(round_X)
-            print(score_preds)
             predictions = [1 if a >= b else 0 for a, b in zip(score_preds[:, 0], score_preds[:, 1])]
         else:
             predictions = model.predict(round_X)
