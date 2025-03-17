@@ -100,9 +100,9 @@ def simulate_tournament_sklearn(test_data, model):
                 
                 # Get stats for each team
                 team_A_stats = test_data[(test_data['TeamA'] == next_team_A) | (test_data['TeamB'] == next_team_A)].\
-                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB', 'ScoreTeamA', 'ScoreTeamB']).iloc[-1]
+                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB', 'ScoreTeamA', 'ScoreTeamB'], errors='ignore').iloc[-1]
                 team_B_stats = test_data[(test_data['TeamA'] == next_team_B) | (test_data['TeamB'] == next_team_B)].\
-                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB', 'ScoreTeamA', 'ScoreTeamB']).iloc[-1]
+                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB', 'ScoreTeamA', 'ScoreTeamB'], errors='ignore').iloc[-1]
 
             
                 # Get only relevant columns
@@ -197,9 +197,9 @@ def simulate_tournament_pytorch(test_data, model, device='cpu'):
                 next_team_B, seed_team_B = winners[i + 1][0], winners[i + 1][2]
                 
                 team_A_stats = test_data[(test_data['TeamA'] == next_team_A) | (test_data['TeamB'] == next_team_A)].\
-                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB', 'ScoreTeamA', 'ScoreTeamB']).iloc[-1]
+                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB', 'ScoreTeamA', 'ScoreTeamB'], errors='ignore').iloc[-1]
                 team_B_stats = test_data[(test_data['TeamA'] == next_team_B) | (test_data['TeamB'] == next_team_B)].\
-                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB', 'ScoreTeamA', 'ScoreTeamB']).iloc[-1]
+                    drop(columns=['TeamA', 'TeamB', 'ResultTeamA', 'SeedTeamA', 'SeedTeamB', 'ScoreTeamA', 'ScoreTeamB'], errors='ignore').iloc[-1]
                 
                 team_A_stats = team_A_stats[team_A_stats.index.str.contains('TeamA') | team_A_stats.index.isin(extra_cols_a)]
                 team_B_stats = team_B_stats[team_B_stats.index.str.contains('TeamB') | team_B_stats.index.isin(extra_cols_b)]
