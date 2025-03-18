@@ -13,12 +13,12 @@ logos = pd.read_csv('logos.csv')
 logo_mapper = pd.read_csv('ncaa_name_mapper.csv')
 
 # Take in their data and model and run it through our more specific functions based on the model type
-def simulate_tournament(test_data, model):
+def simulate_tournament(test_data, model, data_modifier=None):
 
     if isinstance(model, torch.nn.Module):
-        return simulate_tournament_pytorch(test_data, model)
+        return simulate_tournament_pytorch(test_data, model, data_modifier)
     elif isinstance(model, BaseEstimator):
-        return simulate_tournament_sklearn(test_data, model)
+        return simulate_tournament_sklearn(test_data, model, data_modifier)
     else:
         raise TypeError("Unsupported model type. Must be a PyTorch or scikit-learn model.")
 
