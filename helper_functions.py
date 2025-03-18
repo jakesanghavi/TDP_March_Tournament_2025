@@ -371,7 +371,7 @@ def draw_column(x_offset, preds, num_rectangles, ax, text_color='black'):
                 )
                 
                 # Get the images from our predefined logos and add them to the plot
-                img1 = Image.open(urlopen(logos[logos['Image Alt'] == team1_best_match[0]]['Image Src'].iloc[0].replace("80", "200")))
+                img1 = Image.open(urlopen(logos[logos['Image Alt'] == team1_best_match[0]]['Image Src'].iloc[0].replace("=80", "=200")))
                 img1 = np.array(img1)
 
                 height, width, _ = img1.shape
@@ -390,7 +390,7 @@ def draw_column(x_offset, preds, num_rectangles, ax, text_color='black'):
                                     boxcoords="data")
                 ax.add_artist(ab1)
 
-                img2 = Image.open(urlopen(logos[logos['Image Alt'] == team2_best_match[0]]['Image Src'].iloc[0].replace("80", "200")))
+                img2 = Image.open(urlopen(logos[logos['Image Alt'] == team2_best_match[0]]['Image Src'].iloc[0].replace("=80", "=200")))
                 img2 = np.array(img2)
                 
                 height, width, _ = img2.shape
@@ -433,7 +433,7 @@ def draw_column(x_offset, preds, num_rectangles, ax, text_color='black'):
                 )
                 
                 # Get the images from our predefined logos and add them to the plot
-                img1 = Image.open(urlopen(logos[logos['Image Alt'] == team1_best_match[0]]['Image Src'].iloc[0].replace("80", "200")))
+                img1 = Image.open(urlopen(logos[logos['Image Alt'] == team1_best_match[0]]['Image Src'].iloc[0].replace("=80", "=200")))
                 img1 = np.array(img1)
 
                 height, width, _ = img1.shape
@@ -453,7 +453,7 @@ def draw_column(x_offset, preds, num_rectangles, ax, text_color='black'):
                                     boxcoords="data")
                 ax.add_artist(ab1)
 
-                img2 = Image.open(urlopen(logos[logos['Image Alt'] == team2_best_match[0]]['Image Src'].iloc[0].replace("80", "200")))
+                img2 = Image.open(urlopen(logos[logos['Image Alt'] == team2_best_match[0]]['Image Src'].iloc[0].replace("=80", "=200")))
                 img2 = np.array(img2)
                 
                 height, width, _ = img2.shape
@@ -556,7 +556,7 @@ def draw_bracket(plot_feeder, name="My", text_color='black'):
     champ_full_name = logo_mapper[logo_mapper['short_name'] == champ_short_name]['full_name'].iloc[0]
     champ_best_match = process.extractOne(champ_full_name, logos['Image Alt'])
     
-    champ = Image.open(urlopen(logos[logos['Image Alt'] == champ_best_match[0]]['Image Src'].iloc[0].replace("80", "200")))
+    champ = Image.open(urlopen(logos[logos['Image Alt'] == champ_best_match[0]]['Image Src'].iloc[0].replace("=80", "=200")))
     champ = np.array(champ)
 
     imagebox = OffsetImage(champ, zoom=0.7)
