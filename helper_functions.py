@@ -23,7 +23,7 @@ def simulate_tournament(test_data, model):
         raise TypeError("Unsupported model type. Must be a PyTorch or scikit-learn model.")
 
 # Full bracket simulating function
-def simulate_tournament_sklearn(test_data, model):
+def simulate_tournament_sklearn(test_data, model, data_modifier=None):
     
     if not isinstance(test_data, pd.DataFrame):
         raise TypeError("Please pass data as a pandas DataFrame!")
@@ -65,6 +65,10 @@ def simulate_tournament_sklearn(test_data, model):
         # If somehow no data, end
         if round_data.empty:
             break
+           
+        if data_modifier is not None:
+            round_data_init = round_data.copy()
+            round_data = data_modifier(round_data)
 
         # Get our predictors and the teams by row
         round_X = round_data.drop(columns=['RegionTeamA', 'RegionTeamB', 'TeamA', 'TeamB', 'ResultTeamA', 'ScoreTeamA', 'ScoreTeamB'], errors='ignore')
@@ -130,7 +134,7 @@ def simulate_tournament_sklearn(test_data, model):
     return [[tuple(sublist[j:j+2]) if j+1 < len(sublist) else (sublist[j],) 
            for j in range(0, len(sublist), 2)] for sublist in penultimate]
 
-def simulate_tournament_pytorch(test_data, model, device='cpu'):
+def simulate_tournament_pytorch(test_data, model, data_modifier=None, device='cpu'):
     
     if not isinstance(test_data, pd.DataFrame):
         raise TypeError("Please pass data as a pandas DataFrame!")
@@ -163,6 +167,10 @@ def simulate_tournament_pytorch(test_data, model, device='cpu'):
         
         if round_data.empty:
             break
+            
+        if data_modifier is not None:
+            round_data_init = round_data.copy()
+            round_data = data_modifier(round_data)
 
         round_X = round_data.drop(columns=['RegionTeamA', 'RegionTeamB', 'TeamA', 'TeamB', 'ResultTeamA', 'ScoreTeamA', 'ScoreTeamB'], errors='ignore')
         round_teams = round_data[['TeamA', 'TeamB', 'RegionTeamA', 'RegionTeamB', 'SeedTeamA', 'SeedTeamB']]
